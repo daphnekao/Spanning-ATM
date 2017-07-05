@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Benjamin Sisko",
+        "pin": "0333",
+        "balance": 1500
+    },
+    {
+        "name": "Worf",
+        "pin": "0121",
+        "balance": 2400
+    }
+]
