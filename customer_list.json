@@ -2,11 +2,33 @@
     {
         "name": "Benjamin Sisko",
         "pin": "0333",
-        "balance": 1500
+        "accounts": [
+            {
+                "type": "checking",
+                "balance": 1501.33
+            },
+            {
+                "type": "money market",
+                "balance": 38421.87
+            },
+            {
+                "type": "savings",
+                "balance": 51000.00
+            }
+        ]
     },
     {
         "name": "Worf",
         "pin": "0121",
-        "balance": 2400
+        "accounts": [
+            {
+                "type": "checking",
+                "balance": 256.45
+            },
+            {
+                "type": "savings",
+                "balance": 100467.21
+            }
+        ]
     }
 ]
