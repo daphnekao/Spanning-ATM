@@ -4,15 +4,15 @@
         "pin": "0333",
         "accounts": [
             {
-                "type": "checking",
+                "account_type": "checking",
                 "balance": 1501.33
             },
             {
-                "type": "money market",
+                "account_type": "money market",
                 "balance": 38421.87
             },
             {
-                "type": "savings",
+                "account_type": "savings",
                 "balance": 51000.00
             }
         ]
@@ -22,12 +22,22 @@
         "pin": "0121",
         "accounts": [
             {
-                "type": "checking",
+                "account_type": "checking",
                 "balance": 256.45
             },
             {
-                "type": "savings",
+                "account_type": "savings",
                 "balance": 100467.21
+            }
+        ]
+    },
+    {
+        "name": "Odo",
+        "pin": "5922",
+        "accounts": [
+            {
+                "account_type": "savings",
+                "balance": 351000.50
             }
         ]
     }

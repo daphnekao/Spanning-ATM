@@ -5,9 +5,31 @@ class Customer:
         self.pin = pin
         self.name = name
         self.accounts = {}
+        self.summary = []
 
         # De-serialize account information.
-        for account in account_list:
-            self.accounts[account["type"]] = (Account(account["type"],
-                account["balance"]))
+        for item in account_list:
+            self.accounts[item["account_type"]] = Account(item["account_type"],
+                item["balance"])
+
+    def display_account_choices(self):
+        message = ""
+        for key, value in self.accounts:
+            instruction = "To access your {} account, enter {}.\n".format(key, value.code)
+            message.append(instruction)
+        return message
+
+    def update_account_summary(self):
+        for account in self.accounts.values():
+            funds_available_statement = "{}: ${} available".format(
+                account.account_type, account.balance)
+            self.summary.append(funds_available_statement)
+
+    def display_account_summary(self):
+        message = "Here is your account summary: \n"
+        for statement in self.summary:
+            message = message + statement + "\n"
+        return message
+
+
 
