@@ -32,28 +32,26 @@ def transact(account, transaction_type, amount):
     print "New balance is {} dollars.".format(account.balance)
 
 def main():
+    translator = {
+        "y": True,
+        "n": False,
+        "c": "checking",
+        "s": "savings",
+        "m": "money market"
+    }
     pin = str(raw_input("Please type your PIN and hit Enter: "))
     current_customer = customers[pin]
-    print "Hello, {}!".format(customer.name)
+    print "Hello, {}!".format(current_customer.name)
     print current_customer.display_account_summary()
     decision = raw_input("Would you like to perform a transaction? (y/n) ")
-    if decision.lower() == "y":
-        want_to_transact = True
-    elif decision.lower() == "n":
-        want_to_transact = False
+    if decision.lower() in translator:
+        want_to_transact = translator[decision.lower()]
     else:
         print "You must enter y or n."
     if want_to_transact:
         current_customer.display_account_choices()
         account_choice = raw_input(current_customer.display_account_choices())
-        if account_choice.lower() == "c":
-            current_account = customer.accounts["checking"]
-        elif account_choice.lower() == "s":
-            current_account = customer.accounts["savings"]
-        elif account_choice.lower() == "m":
-            current_account = customer.accounts["money market"]
-    print current_account.balance
-
+        current_account = current_customer.accounts[translator[account_choice.lower()]]
 
 if __name__ == "__main__":
     # Initialize list of customers.

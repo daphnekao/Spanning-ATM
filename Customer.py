@@ -14,9 +14,10 @@ class Customer:
 
     def display_account_choices(self):
         message = ""
-        for key, value in self.accounts:
-            instruction = "To access your {} account, enter {}.\n".format(key, value.code)
-            message.append(instruction)
+        for key, value in self.accounts.iteritems():
+            instruction = "To access your {} account, enter {}.\n".format(key,
+                value.code)
+            message += instruction
         return message
 
     def update_account_summary(self):
