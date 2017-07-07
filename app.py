@@ -3,17 +3,6 @@ from datetime import datetime
 
 from Customer import Customer
 
-# Initialize list of customers.
-CUSTOMERS = {}
-
-# Read in customer information.
-with open('customer_list.json') as customer_file:
-    customers = json.load(customer_file)
-    # Store customers by PIN for easy lookup.
-    for customer in customers:
-        CUSTOMERS[customer["pin"]] = Customer(customer["pin"],
-            customer["name"], customer["accounts"])
-
 def get_customer(pin):
     """Retrieve customer information by PIN.
     """
@@ -42,13 +31,44 @@ def transact(account, transaction_type, amount):
     account.history.append(log_entry)
     print "New balance is {} dollars.".format(account.balance)
 
-# Test
-current_customer = CUSTOMERS["0333"]
-savings_account = current_customer.accounts["savings"]
-money_market_account = current_customer.accounts["money market"]
-checking_account = current_customer.accounts["checking"]
-print get_balance(money_market_account)
-transact(money_market_account, "withdraw", 300.25)
-transact(money_market_account, "deposit", 1000.56)
+def main():
+    translator = {
+        "y": True,
+        "n": False,
+        "c": "checking",
+        "s": "savings",
+        "m": "money market"
+    }
+
+    pin = str(raw_input("Please type your PIN and hit Enter: "))
+    current_customer = customers[pin]
+    print "Hello, {}!".format(current_customer.name)
+    print current_customer.display_account_summary()
+    # TODO: Turn this into a while loop.
+    decision = raw_input("Would you like to perform a transaction? (y/n) ")
+    if decision.lower() in translator:
+        want_to_transact = translator[decision.lower()]
+    else:
+        print "You must enter y or n."
+    if want_to_transact:
+        current_customer.display_account_choices()
+        account_choice = raw_input(current_customer.display_account_choices())
+        current_account = current_customer.accounts[translator[account_choice.lower()]]
+    else:
+        print "Thank you, good bye!"
+
+if __name__ == "__main__":
+    # Initialize list of customers.
+    customers = {}
+    # Read in customer information.
+    with open('DS9_data.json') as data:
+        customer_list = json.load(data)
+        # Store customers by PIN for easy lookup.
+        for item in customer_list:
+            customers[item["pin"]] = Customer(item["pin"],
+                item["name"], item["accounts"])
+        for customer in customers.values():
+            customer.update_account_summary()
+    main()
 
 
