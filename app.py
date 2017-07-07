@@ -39,10 +39,12 @@ def main():
         "s": "savings",
         "m": "money market"
     }
+
     pin = str(raw_input("Please type your PIN and hit Enter: "))
     current_customer = customers[pin]
     print "Hello, {}!".format(current_customer.name)
     print current_customer.display_account_summary()
+    # TODO: Turn this into a while loop.
     decision = raw_input("Would you like to perform a transaction? (y/n) ")
     if decision.lower() in translator:
         want_to_transact = translator[decision.lower()]
@@ -52,6 +54,8 @@ def main():
         current_customer.display_account_choices()
         account_choice = raw_input(current_customer.display_account_choices())
         current_account = current_customer.accounts[translator[account_choice.lower()]]
+    else:
+        print "Thank you, good bye!"
 
 if __name__ == "__main__":
     # Initialize list of customers.
