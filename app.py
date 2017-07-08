@@ -39,7 +39,6 @@ def main():
     current_customer = customers[pin]
     print "Hello, {}!".format(current_customer.name)
     print current_customer.display_account_summary()
-    # TODO: Turn this into a while loop.
 
     # Start counting transactions.
     number_of_transactions = 0
@@ -58,6 +57,7 @@ def main():
     while want_to_transact:
         account_choice = raw_input(current_customer.display_account_choices()).strip().lower()
         current_account = current_customer.accounts[translator[account_choice]]
+        # TO-DO: Move this to a function on Account class.
         question = "Would you like to withdraw or make a deposit today? (w/d) "
         transaction_decision = raw_input(question).strip().lower()
         if transaction_decision == "w":
@@ -74,6 +74,7 @@ if __name__ == "__main__":
     # Initialize list of customers.
     customers = {}
     # Read in customer information.
+    # TO-DO: Provide option of reading in any data file, not just the DS9 one.
     with open('DS9_data.json') as data:
         customer_list = json.load(data)
         # Store customers by PIN for easy lookup.
