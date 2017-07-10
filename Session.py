@@ -11,8 +11,8 @@ TRANSLATOR = {
 }
 
 
-first_transaction_question = "Would you like to perform a transaction? (y/n) "
-subsesquent_transaction_question = ("Would you like to perform another "
+FIRST_TRANSACTION_QUESTION = "Would you like to perform a transaction? (y/n) "
+SUBSEQUENT_TRANSACTION_QUESTION = ("Would you like to perform another "
         "transaction? (y/n) ")
 # Need to allow multiple users to log in and log out.
 
@@ -42,6 +42,10 @@ class Session:
         return self.customers.get(pin,
             "That is not a valid PIN. Please try again.")
 
+    def print_receipt(self):
+        # TO-DO: Maybe list the transactions that occurred today.
+        print "Please take your receipt."
+
     def login(self):
         # In real life, this would be a credit card number, and we would
         # confirm via PIN
@@ -51,6 +55,18 @@ class Session:
         print self.current_customer.display_account_summary()
         self.current_customer = self.get_customer()
 
+    def serve(self):
+        decision = raw_input(FIRST_TRANSACTION_QUESTION).strip().lower()
+        if decision in TRANSLATOR:
+            want_to_transact = TRANSLATOR[decision]
+        else:
+            print "You must enter y or n."
+        while want_to_transact:
+            account_choice = raw_input(current_customer.display_account_choices()).strip().lower()
+            current_account = current_customer.accounts[TRANSLATOR[account_choice]]
+            current_account.execute_transactions()
+            want_to_transact = raw_input(SUBSEQUENT_TRANSACTION_QUESTION).strip().lower()
+
     def logout(self):
-        pass
+        print "Thank you for banking with Austin Community Bank. Good bye!"
 
