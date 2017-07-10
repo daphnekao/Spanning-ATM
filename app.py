@@ -40,16 +40,12 @@ def main():
     print "Hello, {}!".format(current_customer.name)
     print current_customer.display_account_summary()
 
-    # Start counting transactions.
-    number_of_transactions = 0
-
     first_transaction_question = ("Would you like to perform a "
         "transaction? (y/n) ")
     subsesquent_transaction_question = ("Would you like to perform another "
         "transaction? (y/n) ")
 
     decision = raw_input(first_transaction_question).strip().lower()
-    number_of_transactions += 1
     if decision in translator:
         want_to_transact = translator[decision]
     else:
@@ -57,17 +53,8 @@ def main():
     while want_to_transact:
         account_choice = raw_input(current_customer.display_account_choices()).strip().lower()
         current_account = current_customer.accounts[translator[account_choice]]
-        # TO-DO: Move this to a function on Account class.
-        question = "Would you like to withdraw or make a deposit today? (w/d) "
-        transaction_decision = raw_input(question).strip().lower()
-        if transaction_decision == "w":
-            current_account.withdraw()
-        elif transaction_decision == "d":
-            current_account.deposit()
-        else:
-            print "You must enter w or d. Canceling transaction."
+        current_account.execute_transactions()
         want_to_transact = raw_input(subsesquent_transaction_question).strip().lower()
-
     print "Thank you, good bye!"
 
 if __name__ == "__main__":
