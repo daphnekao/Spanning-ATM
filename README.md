@@ -22,8 +22,12 @@ python app.py data/ds9_data.json
 ## Tests
 To run all unit tests, navigate to the `tests` folder. Execute:
 ```python
-python app.py tests/test_app.py
+python app.py unit_tests.py
 ```
+
+**Note:** At this time, only unit tests for the individual modules are
+included. A full test suite would also include an end-to-end test for
+the application named `test_app.py`.
 
 ## Extensions
 As this is only a partial implementation, there are many extensions to explore.
