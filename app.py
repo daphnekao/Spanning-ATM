@@ -9,6 +9,7 @@ def open_session(path_to_data):
         return Session(customer_list)
 
 def main(path_to_data):
+    # TO-DO: Allow multiple customers to use ATM in same session, not just one.
     session = open_session(path_to_data)
     session.display_homescreen()
     session.login()
@@ -23,5 +24,3 @@ if __name__ == "__main__":
         help="Path to data file for ATM session")
     args = parser.parse_args()
     main(args.path_to_data)
-
-

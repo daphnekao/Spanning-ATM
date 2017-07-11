@@ -78,11 +78,11 @@ class Account:
         else:
             withdrawal_amount = float(response)
             if withdrawal_amount > 200:
+                # TO-DO: But how do I enforce this?
                 raise ValueError("You may not withdraw more than $200 in one session.")
-                # But how do I enforce this?
             elif withdrawal_amount % 20 != 0:
                 raise ValueError("You must enter a multiple of 20")
-            # Handle overdrafts. Continue or don't?
+            # TO-DO: Handle overdrafts. Ask customer if they want to continue or not.
             elif self.balance - withdrawal_amount < 0:
                 warning = ("This will overdraw your account. "
                     "Please withdraw a smaller amount.")
