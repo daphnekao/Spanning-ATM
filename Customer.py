@@ -1,4 +1,5 @@
 from Account import Account
+from Format import clean, dollar
 
 class Customer:
     def __init__(self, pin, name, account_list):
@@ -23,8 +24,8 @@ class Customer:
 
     def update_account_summary(self):
         for account in self.accounts.values():
-            funds_available_statement = "{}: ${} available".format(
-                account.account_type, account.balance)
+            funds_available_statement = "{}: {} available".format(
+                account.account_type, dollar(account.balance))
             self.summary.append(funds_available_statement)
 
     def display_account_summary(self):
