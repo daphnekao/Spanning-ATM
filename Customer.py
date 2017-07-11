@@ -6,6 +6,7 @@ class Customer:
         self.name = name
         self.accounts = {}
         self.summary = []
+        self.num_transactions = 0
 
         # De-serialize account information.
         for item in account_list:

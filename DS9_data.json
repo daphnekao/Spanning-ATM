@@ -40,5 +40,35 @@
                 "balance": 351000.50
             }
         ]
+    },
+    {
+        "name": "Quark",
+        "pin": "7843",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 540725.99
+            }
+        ]
+    },
+    {
+        "name": "Jadzia Dax",
+        "pin": "4477",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 4.55
+            },
+            {
+                "account_type": "money market",
+                "balance": 189.90
+            },
+            {
+                "account_type": "savings",
+                "balance": 700000.00
+            }
+        ]
     }
 ]
+
+
