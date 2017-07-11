@@ -18,20 +18,6 @@
         ]
     },
     {
-        "name": "Worf",
-        "pin": "0121",
-        "accounts": [
-            {
-                "account_type": "checking",
-                "balance": 256.45
-            },
-            {
-                "account_type": "savings",
-                "balance": 100467.21
-            }
-        ]
-    },
-    {
         "name": "Odo",
         "pin": "5922",
         "accounts": [
@@ -66,6 +52,48 @@
             {
                 "account_type": "savings",
                 "balance": 700000.00
+            }
+        ]
+    },
+    {
+        "name": "Julian Bashir",
+        "pin": "2325",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 595.00
+            }
+        ]
+    },
+    {
+        "name": "Miles O'Brien",
+        "pin": "0420",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 128.99
+            },
+            {
+                "account_type": "money market",
+                "balance": 3580.21
+            },
+            {
+                "account_type": "savings",
+                "balance": 1000000.00
+            }
+        ]
+    },
+    {
+        "name": "Kira Nerys",
+        "pin": "6196",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 1001.56
+            },
+            {
+                "account_type": "savings",
+                "balance": 23.57
             }
         ]
     }

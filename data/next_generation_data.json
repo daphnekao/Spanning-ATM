@@ -1,11 +1,114 @@
-// "Jean-Luc Picard"
-// "Worf"
-// "William T. Riker"
-// "Deanna Troi"
-// "Data"
-// "Geordi La Forge"
-// "Beverly Crusher"
-// "Guinan"
-// 1912: "Kira Nerys"
-// 2366: "Julian Bashir"
-// 8511: "Miles O'Brien"
+[
+    {
+        "name": "Jean-Luc Picard",
+        "pin": "4145",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 53.98
+            },
+            {
+                "account_type": "money market",
+                "balance": 2000000.00
+            },
+            {
+                "account_type": "savings",
+                "balance": 650782.24
+            }
+        ]
+    },
+    {
+        "name": "Worf",
+        "pin": "0121",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 256.45
+            },
+            {
+                "account_type": "savings",
+                "balance": 100467.21
+            }
+        ]
+    },
+    {
+        "name": "William T. Riker",
+        "pin": "8508",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 0.45
+            },
+            {
+                "account_type": "money market",
+                "balance": 38421.87
+            },
+            {
+                "account_type": "savings",
+                "balance": 51000.00
+            }
+        ]
+    },
+    {
+        "name": "Deanna Troi",
+        "pin": "7777",
+        "accounts": [
+            {
+                "account_type": "savings",
+                "balance": 2878.43
+            }
+        ]
+    },
+    {
+        "name": "Data",
+        "pin": "2748",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 49.49
+            }
+        ]
+    },
+    {
+        "name": "Geordi La Forge",
+        "pin": "1132",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 100.01
+            },
+            {
+                "account_type": "money market",
+                "balance": 345.00
+            },
+            {
+                "account_type": "savings",
+                "balance": 300457.00
+            }
+        ]
+    },
+    {
+        "name": "Beverly Crusher",
+        "pin": "5221",
+        "accounts": [
+            {
+                "account_type": "checking",
+                "balance": 88.90
+            },
+            {
+                "account_type": "savings",
+                "balance": 3730.50
+            }
+        ]
+    },
+    {
+        "name": "Guinan",
+        "pin": "3873",
+        "accounts": [
+            {
+                "account_type": "savings",
+                "balance": 5134046.90
+            }
+        ]
+    }
+]
