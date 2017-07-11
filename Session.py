@@ -1,6 +1,7 @@
+from Utils import BOOLEAN_LOOKUP, ACCOUNT_LOOKUP
 from Customer import Customer
 from Format import clean, dollar
-from Utils import TRANSLATOR
+# Should Utils and Format be combined?
 
 class Session:
     def __init__(self, customer_list):
@@ -53,22 +54,28 @@ class Session:
             question = "Would you like to perform a transaction? (y/n) "
         else:
             question = "Would you like to perform another transaction? (y/n) "
+        retry_instructions = "You must enter y or n: "
+        # TO-DO: Eliminate overlap with Account.execute_transactions()
         answer = clean(raw_input(question))
-        if answer in TRANSLATOR:
-            decision = TRANSLATOR[answer]
+        attempts = 0
+        while answer not in BOOLEAN_LOOKUP:
+            answer = clean(raw_input(retry_instructions))
+            attempts +=1
+            if attempts >= 3:
+                print "Canceling transaction after three attempts."
+                break
+                return
+        if answer in BOOLEAN_LOOKUP:
+            return BOOLEAN_LOOKUP[answer]
         else:
-            print "You must enter y or n: "
-        return decision
-        # TO-DO: Currently jumps to logout screen if I enter something
-        # besides y or n.
-        # TO-DO: Time out after three attempts.
-
+            print "Not a valid response. Canceling transaction."
+            return
     def serve(self):
         # Count number of transactions. (Do I need this?)
         decision = self.proceed(first_time=True)
         while decision is True:
             account_choice = clean(raw_input(self.current_customer.display_account_choices()))
-            current_account = self.current_customer.accounts[TRANSLATOR[account_choice]]
+            current_account = self.current_customer.accounts[ACCOUNT_LOOKUP[account_choice]]
             current_account.execute_transactions()
             decision = self.proceed()
             self.current_customer.num_transactions += 1

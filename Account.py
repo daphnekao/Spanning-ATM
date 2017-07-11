@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from Format import clean, dollar
+from Utils import BOOLEAN_LOOKUP
 
 CODES = {
     "checking": "c",
@@ -23,24 +24,24 @@ class Account:
             "To cancel, press x. \n")
         retry_instructions = "You must enter w, d or x. Try again: "
         # What if the user presses a number, instead?
-        transaction_decision = clean(raw_input(instructions))
+        answer = clean(raw_input(instructions))
         attempts = 0
-        while transaction_decision not in ["w", "d", "x"]:
-            transaction_decision = raw_input(retry_instructions)
+        while answer not in ["w", "d", "x"]:
+            answer = clean(raw_input(retry_instructions))
             attempts += 1
             if attempts >= 3:
                 print "Canceling transaction after three attempts."
                 break
                 return
-        if transaction_decision == "w":
+        if answer == "w":
             self.withdraw()
-        elif transaction_decision == "d":
+        elif answer == "d":
             self.deposit()
-        elif transaction_decision == "x":
+        elif answer == "x":
             print "Canceling transaction."
             return
         else:
-            message = "Input must be w, d, or x. Canceling transaction."
+            message = "Not a valid response. Canceling transaction."
             # TO-DO: Return to home screen
             print message
             return
@@ -88,19 +89,25 @@ class Account:
         else:
             withdrawal_amount = float(response)
             difference = self.balance - withdrawal_amount
+            # TO-DO: Wrap this in a while loop with opportunities to try again.
+            # Can I use try-except clauses here?
             if withdrawal_amount > 200:
                 # TO-DO: But how do I enforce this?
-                raise ValueError("You may not withdraw more than $200 in one session.")
+                print "You may not withdraw more than $200 in one session."
             elif withdrawal_amount % 20 != 0:
-                raise ValueError("You must enter a multiple of $20")
-            # TO-DO: Handle overdrafts. Ask customer if they want to continue or not.
+                print "You must enter a multiple of $20"
+            # Handle overdrafts. Ask customer if they want to continue or not.
             elif difference < 0:
                 warning = ("This would overdraw your account by {} and "
                     "incur an overdraft fee of {}. Are you sure you want to continue? (y/n) ".format(dollar(abs(difference)), dollar(OVERDRAFT_FEE)))
-                decision = clean(raw_input(warning))
-                # USE TRANSLATOR FROM UTILS!!!
-
+                answer = clean(raw_input(warning))
+                proceed_anyway = BOOLEAN_LOOKUP[answer]
+                if proceed_anyway:
+                    self.balance -= withdrawal_amount
+                    print self.report_transaction_success("withdrawal", withdrawal_amount)
+                    self.log("withdrawal", withdrawal_amount)
             else:
+                # TO-DO: eliminate redundancy.
                 self.balance -= withdrawal_amount
                 print self.report_transaction_success("withdrawal", withdrawal_amount)
                 self.log("withdrawal", withdrawal_amount)
