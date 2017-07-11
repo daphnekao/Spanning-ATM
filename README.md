@@ -14,10 +14,17 @@ the command line.
 ```sh
 python app.py <path_to_data>
 ```
-For example:
+where `path_to_data` points to the seed data that you want to initialize an
+ATM session with. For example:
 ```sh
-python app.py data/ds9_data.json
+python app.py data/DS9_data.json
 ```
+
+## Interacting with the Program
+Once the application is up and running, multiple customers can log in with
+their PIN numbers and log out when they are done banking. However, if you are
+privy to a secret admin code, you can shut down the session entirely. This
+code is [[]] and it comes into play in [[]].
 
 ## Tests
 To run all unit tests, navigate to the `tests` folder. Execute:

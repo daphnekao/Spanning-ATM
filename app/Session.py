@@ -11,6 +11,7 @@ class Session:
         """
         self.customers = {}
         self.current_customer = None
+        self.running = True
         for item in customer_list:
             self.customers[item["pin"]] = Customer(item["pin"],
                 item["name"], item["accounts"])
@@ -19,7 +20,14 @@ class Session:
             customer.update_account_summary()
 
     def display_homescreen(self):
+        """The secret admin code for shutting down the session is xxxx.
+        """
         print "Welcome to Austin Community Bank!"
+        pin = str(raw_input("To get started, please enter your PIN: "))
+        if pin == "xxxx":
+            self.running = False
+        else:
+            self.current_customer = self.get_customer(pin)
 
     def get_customer(self, pin):
         """Retrieve customer information by PIN."""
@@ -42,8 +50,6 @@ class Session:
     def login(self):
         # In real life, this would be a credit card number, and we would
         # confirm via PIN
-        pin = str(raw_input("To get started, please enter your PIN: "))
-        self.current_customer = self.get_customer(pin)
         print "Hello, {}!".format(self.current_customer.name)
         print self.current_customer.display_account_summary()
 
@@ -83,4 +89,3 @@ class Session:
 
     def logout(self):
         print "Thank you for banking with Austin Community Bank. Good bye!"
-
