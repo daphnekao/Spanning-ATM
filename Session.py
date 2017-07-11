@@ -1,14 +1,6 @@
 from Customer import Customer
-
-TRANSLATOR = {
-    "y": True,
-    "n": False,
-    "c": "checking",
-    "s": "savings",
-    "m": "money market",
-    "w": "withdraw",
-    "d": "deposit"
-}
+from Format import clean, dollar
+from Utils import TRANSLATOR
 
 class Session:
     def __init__(self, customer_list):
@@ -37,8 +29,11 @@ class Session:
                 "That is not a valid PIN. Please try again.")
 
     def receipt(self):
-        # TO-DO: Fix singular case: "You made 1 transactions today."
-        message = "You made {} transactions today. \n".format(
+        if self.current_customer.num_transactions == 1:
+            message = "You made {} transaction today. \n".format(
+            self.current_customer.num_transactions)
+        else:
+            message = "You made {} transactions today. \n".format(
             self.current_customer.num_transactions)
         message += self.current_customer.display_account_summary()
         return message
@@ -58,7 +53,7 @@ class Session:
             question = "Would you like to perform a transaction? (y/n) "
         else:
             question = "Would you like to perform another transaction? (y/n) "
-        answer = raw_input(question).strip().lower()
+        answer = clean(raw_input(question))
         if answer in TRANSLATOR:
             decision = TRANSLATOR[answer]
         else:
@@ -72,7 +67,7 @@ class Session:
         # Count number of transactions. (Do I need this?)
         decision = self.proceed(first_time=True)
         while decision is True:
-            account_choice = raw_input(self.current_customer.display_account_choices()).strip().lower()
+            account_choice = clean(raw_input(self.current_customer.display_account_choices()))
             current_account = self.current_customer.accounts[TRANSLATOR[account_choice]]
             current_account.execute_transactions()
             decision = self.proceed()
