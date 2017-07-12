@@ -8,6 +8,7 @@ def open_session(path_to_data):
 
     :param path_to_data: The relative path to the JSON file.
     :type path_to_data: ``str``
+
     :returns: A session file containing customers' information from
         the specified JSON file.
     :return type: :py:class:`Session.Session`

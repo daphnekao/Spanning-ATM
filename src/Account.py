@@ -75,6 +75,7 @@ class Account:
         :type transaction_type: ``str``
         :param amount: The amount deposited or withdrawn.
         :type amount: ``float``
+
         :returns: None
         """
         log_entry = {
@@ -91,6 +92,7 @@ class Account:
         :type transaction_type: ``str``
         :param amount: The amount deposited or withdrawn.
         :type amount: ``float``
+
         :returns: A message confirming that the balance was adjusted correctly.
         :return type: ``str``
         """
