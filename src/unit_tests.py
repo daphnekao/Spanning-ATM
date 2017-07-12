@@ -1,4 +1,5 @@
-"""
+"""Unit tests for the application.
+
 **Note**: There are broken unit tests for cases that should be handled in
 the future.
 """
