@@ -3,8 +3,7 @@
 
 from datetime import datetime
 
-from Format import clean, dollar
-from Utils import BOOLEAN_LOOKUP
+from Utils import BOOLEAN_LOOKUP, clean, dollar
 
 CODES = {
     "checking": "c",
