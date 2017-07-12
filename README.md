@@ -10,7 +10,7 @@ the command line.
 - Assume that you have Python 2.7 or higher installed on your computer.
 - Clone this repo.
 - Sample data lives in the `data` folder.
-- In your terminal, navigate into the `app` directory. Run:
+- In your terminal, navigate into the `src` directory. Run:
 ```sh
 python app.py <path_to_data>
 ```
