@@ -1,3 +1,6 @@
+"""
+"""
+
 from datetime import datetime
 
 from Format import clean, dollar
@@ -13,12 +16,16 @@ OVERDRAFT_FEE = 33
 
 class Account:
     def __init__(self, account_type, balance):
+        """
+        """
         self.account_type = account_type
         self.code = CODES[account_type]
         self.balance = balance
         self.history = []
 
     def execute_transactions(self):
+        """
+        """
         instructions = ("To make a withdrawal, press w. \n"
             "To make a deposit, press d. \n"
             "To cancel, press x. \n")
@@ -47,6 +54,8 @@ class Account:
             return
 
     def log(self, transaction_type, amount):
+        """
+        """
         log_entry = {
             "transaction_type": transaction_type,
             "amount": dollar(amount),
@@ -68,7 +77,9 @@ class Account:
         return report
 
     def deposit(self):
-        # Can deposit any amount
+        """
+        Can deposit any amount
+        """
         question = "How much will you be depositing today? "
         deposit_amount = float(raw_input(question))
         # How about reading check images and confirming the amount?
@@ -78,7 +89,9 @@ class Account:
         self.log("deposit", deposit_amount)
 
     def withdraw(self):
-        # Can only withdraw in multiples of 20.
+        """
+        Can only withdraw in multiples of 20.
+        """
         instructions = ("Enter the amount you wish to withdraw. \n"
             "It must be a multiple of $20. You may withdraw up to $200. \n"
             "To cancel this transaction, press x: \n")
