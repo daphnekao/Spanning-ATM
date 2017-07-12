@@ -48,7 +48,6 @@ class Account:
             return
         else:
             message = "Not a valid response. Canceling transaction."
-            # TO-DO: Return to home screen
             print message
             return
 
@@ -101,8 +100,7 @@ class Account:
         else:
             withdrawal_amount = float(response)
             difference = self.balance - withdrawal_amount
-            # TO-DO: Wrap this in a while loop with opportunities to try again.
-            # Can I use try-except clauses here?
+            attempts = 0
             if withdrawal_amount > 200:
                 # TO-DO: But how do I enforce this?
                 print "You may not withdraw more than $200 in one session."
@@ -111,15 +109,22 @@ class Account:
             # Handle overdrafts. Ask customer if they want to continue or not.
             elif difference < 0:
                 warning = ("This would overdraw your account by {} and "
-                    "incur an overdraft fee of {}. Are you sure you want to continue? (y/n) ".format(dollar(abs(difference)), dollar(OVERDRAFT_FEE)))
+                    "incur an overdraft fee of {}. "
+                    "Are you sure you want to continue? (y/n) ".format(
+                        dollar(abs(difference)), dollar(OVERDRAFT_FEE)))
                 answer = clean(raw_input(warning))
                 proceed_anyway = BOOLEAN_LOOKUP[answer]
                 if proceed_anyway:
                     self.balance -= withdrawal_amount
-                    print self.report_transaction_success("withdrawal", withdrawal_amount)
+                    print self.report_transaction_success("withdrawal",
+                        withdrawal_amount)
                     self.log("withdrawal", withdrawal_amount)
+                    self.balance -= OVERDRAFT_FEE
+                    overdraft_warning = ("Deducted additional $33. "
+                        "Your account is overdrawn please make a deposit soon.")
+                    print overdraft_warning
+                    self.log ("overdraft fee", OVERDRAFT_FEE)
             else:
-                # TO-DO: eliminate redundancy.
                 self.balance -= withdrawal_amount
                 print self.report_transaction_success("withdrawal", withdrawal_amount)
                 self.log("withdrawal", withdrawal_amount)

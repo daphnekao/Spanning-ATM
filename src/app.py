@@ -4,14 +4,19 @@ import argparse
 from Session import Session
 
 def open_session(path_to_data):
-    """
+    """Opens a new ATM session with specific seed data.
+    :param path_to_data: The relative path to the JSON file.
+    :type path_to_data: ``str``
+    :returns: A session file containing customers' information from
+        the specified JSON file.
+    :return type: :py:class:`Session.Session`
     """
     with open(path_to_data) as data:
         customer_list = json.load(data)
-        return Session(customer_list)
+        return Session(customer_list, "Austin Community Bank")
 
 def main(path_to_data):
-    """(Summary)
+    """Main point of entry for the application.
     Customers are invited to approach the ATM and do their banking through it.
     When prompted for a PIN, an admin user who knows the secret code 'xxxx'
     can enter this code at any time to shut down the program.
@@ -19,10 +24,11 @@ def main(path_to_data):
     session = open_session(path_to_data)
     while session.running:
         session.display_homescreen()
+        session.get_customer()
         if not session.running:
             print "Shutting down."
             break
-        session.login()
+        session.greet_customer()
         session.serve()
         session.logout()
 
