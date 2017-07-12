@@ -1,16 +1,16 @@
 # Spanning-ATM
-
-## Introduction
 This is a command line tool written in Python that simulates an
 ATM (Automatic Teller Machine) experience. Both the administrator
 (person who sets up the ATM) and customers interact with the ATM through
 the command line.
 
 ## Setup
-- Assume that you have Python 2.7 or higher installed on your computer.
-- Clone this repo.
-- Sample data lives in the `data` folder.
-- In your terminal, navigate into the `src` directory. Run:
+1. You must have Python 2.7.2 or higher installed on your computer (any Mac
+will suffice, for example).
+
+1. Clone or download this repository.
+
+1. In your terminal, navigate into the `src` directory. Run:
 ```sh
 python app.py <path_to_data>
 ```
@@ -23,36 +23,42 @@ python app.py ../data/DS9_data.json
 ## Interacting with the Program
 Once the application is up and running, multiple customers can log in with
 their PIN numbers and log out when they are done banking. However, if you are
-privy to a secret admin code, you can shut down the session entirely. This
-code is [[]] and it comes into play in [[]].
+privy to a secret admin code, then you can shut down the session entirely. This
+code is "xxxx"; enter it the next time the program prompts you for a PIN.
+
+## Data
+Two seed data sets live in the `data` folder. The program will ingest any JSON
+file that meets the spec exemplified in these files.
+
+Here are the PINs for the Deep Space Nine crew:
+
+| Name          | PIN  |
+| ------------- |:----:|
+| Benjamin Sisko| 0333 |
+| Odo           | 5922 |
+| Quark         | 7843 |
+| Jadzia Dax    | 4477 |
+| Julian Bashir | 2325 |
+| Miles O'Brien | 0420 |
+| Kira Nerys    | 6196 |
+
+And here are the PINs for the Next Generation crew:
+
+| Name            | PIN  |
+| -------------   |:----:|
+| Jean-Luc Picard | 4145 |
+| Worf            | 0121 |
+| William T. Riker| 8508 |
+| Deanna Troi     | 7777 |
+| Data            | 2748 |
+| Geordi La Forge | 1132 |
+| Beverly Crusher | 5221 |
+| Guinan          | 3873 |
+
 
 ## Tests
-To run all unit tests, navigate to the `tests` folder. Execute:
-```python
-python app.py unit_tests.py
+To run all unit tests, stay in the `src` folder and execute:
+```sh
+python unit_tests.py
 ```
 
-**Note:** At this time, only unit tests for the individual modules are
-included. A full test suite would also include an end-to-end test for
-the application named `test_app.py`.
-
-## Extensions
-As this is only a partial implementation, there are many extensions to explore.
-A sample:
-- In real life, a customer would dip their bank card into a slot. The card
-reader would retrieve the customer's information based on this unique card
-number, *then* ask for the PIN to confirm the customer's identity.
-- Banks typically allow a given customer no more than six withdrawals per month from their savings account. How can we introduce this rule?
-- This prototype reads in seed data from a JSON file, but the data
-schema is relatively flat; would it make more sense to store customer
-data in a SQL table? If so, how would we implement that?
-- The program currently allows the customer only one chance to enter a number for deposit or withdrawal. It would be useful to add a "button" that would ask the user to confirm the amount and provide an opportunity for re-entering or starting over before proceeding.
-- The only transactions allowed at this time are withdrawal and deposit.
-Customers with multiple accounts may wish to transfer money between accounts.
-- The current user interface is the command line. To make a user-friendly UI, we would look into setting up routes that a front-end framework could access for programming buttons and displays.
-- Transaction logging is enabled. A next step would be to give the user options
-such as printing a more detailed receipt and viewing recent account activity.
-- Many functions in this implementation display error messages to the user such as "Not a valid response. Canceling transaction." However,
-a programmer fixing and extending this application might wish to throw actual errors and raise actual exceptions "behind the scenes" for efficient
-debugging.
-- This program currently does not handle negative numbers.

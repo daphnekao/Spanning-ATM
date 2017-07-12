@@ -20,6 +20,8 @@ class Customer:
                 item["balance"])
 
     def display_account_choices(self):
+        """
+        """
         message = ""
         for key, value in self.accounts.iteritems():
             instruction = "To access your {} account, enter {}.\n".format(key,
@@ -28,12 +30,17 @@ class Customer:
         return message
 
     def update_account_summary(self):
+        """
+        """
+        self.summary = []
         for account in self.accounts.values():
             funds_available_statement = "{}: {} available".format(
                 account.account_type, dollar(account.balance))
             self.summary.append(funds_available_statement)
 
     def display_account_summary(self):
+        """
+        """
         message = "Here is your account summary: \n"
         for statement in self.summary:
             message = message + statement + "\n"
