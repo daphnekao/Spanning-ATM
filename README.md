@@ -17,7 +17,7 @@ python app.py <path_to_data>
 where `path_to_data` points to the seed data that you want to initialize an
 ATM session with. For example:
 ```sh
-python app.py data/DS9_data.json
+python app.py ../data/DS9_data.json
 ```
 
 ## Interacting with the Program
@@ -55,3 +55,4 @@ such as printing a more detailed receipt and viewing recent account activity.
 - Many functions in this implementation display error messages to the user such as "Not a valid response. Canceling transaction." However,
 a programmer fixing and extending this application might wish to throw actual errors and raise actual exceptions "behind the scenes" for efficient
 debugging.
+- This program currently does not handle negative numbers.

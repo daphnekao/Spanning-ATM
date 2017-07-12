@@ -1,4 +1,11 @@
+"""
+"""
+
 import unittest
+import Utils
+# from Account import Account
+# from Customer import Customer
+# from Session import Session
 
 class TestAccount(unittest.TestCase):
     def test_execute_transactions(self):
@@ -48,12 +55,12 @@ class TestSession(unittest.TestCase):
     def test_logout(self):
         pass
 
-class TestFormat(unittest.TestCase):
+class TestUtils(unittest.TestCase):
     def test_clean(self):
-        pass
+        self.assertEqual(Utils.clean(" Black Power "), "black power")
 
     def test_dollar(self):
-        pass
+        self.assertEqual(Utils.dollar(54602.3), "$54,602.30")
 
 if __name__ == "__main__":
     unittest.main()

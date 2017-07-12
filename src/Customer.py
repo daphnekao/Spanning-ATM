@@ -1,8 +1,13 @@
+"""
+"""
+
 from Account import Account
-from Format import clean, dollar
+from Utils import dollar
 
 class Customer:
     def __init__(self, pin, name, account_list):
+        """
+        """
         self.pin = pin
         self.name = name
         self.accounts = {}

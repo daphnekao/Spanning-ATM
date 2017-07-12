@@ -4,15 +4,19 @@ import argparse
 from Session import Session
 
 def open_session(path_to_data):
+    """
+    """
     with open(path_to_data) as data:
         customer_list = json.load(data)
         return Session(customer_list)
 
 def main(path_to_data):
-    # TO-DO: Allow multiple customers to use ATM in same session, not just one.
-    # Admin boots up a session with a specific customer database.
+    """(Summary)
+    Customers are invited to approach the ATM and do their banking through it.
+    When prompted for a PIN, an admin user who knows the secret code 'xxxx'
+    can enter this code at any time to shut down the program.
+    """
     session = open_session(path_to_data)
-    # Customers are invited to approach the ATM and do their banking through it.
     while session.running:
         session.display_homescreen()
         if not session.running:
@@ -21,11 +25,6 @@ def main(path_to_data):
         session.login()
         session.serve()
         session.logout()
-
-    # TO-DO: Right now, as soon as the customer enters "n", the terminal
-    # prints the good bye message and exits the program entirely. We need to
-    # keep it open for the next user.
-    # The Admin can shut down the session at any time.
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
