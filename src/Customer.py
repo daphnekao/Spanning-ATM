@@ -1,12 +1,10 @@
-"""
-"""
-
 from Account import Account
 from Utils import dollar
 
+
 class Customer:
     def __init__(self, pin, name, account_list):
-        """
+        """Represents a customer
         """
         self.pin = pin
         self.name = name
@@ -16,16 +14,16 @@ class Customer:
 
         # De-serialize account information.
         for item in account_list:
-            self.accounts[item["account_type"]] = Account(item["account_type"],
-                item["balance"])
+            self.accounts[item["account_type"]] = Account(
+                item["account_type"], item["balance"])
 
     def display_account_choices(self):
         """
         """
         message = ""
         for key, value in self.accounts.iteritems():
-            instruction = "To access your {} account, enter {}.\n".format(key,
-                value.code)
+            instruction = "To access your {} account, enter {}.\n".format(
+                key, value.code)
             message += instruction
         return message
 
@@ -45,6 +43,3 @@ class Customer:
         for statement in self.summary:
             message = message + statement + "\n"
         return message
-
-
-

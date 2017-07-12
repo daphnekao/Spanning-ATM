@@ -1,10 +1,13 @@
-"""
-"""
-
 from Customer import Customer
-from Utils import BOOLEAN_LOOKUP, ACCOUNT_LOOKUP, clean, dollar
+from Utils import BOOLEAN_LOOKUP, ACCOUNT_LOOKUP, clean
+
 
 class Session:
+    """Represents an ATM session.
+
+    Every session boots up with a specific data set and the name of a
+    specific bank.
+    """
     def __init__(self, customer_list, bank_name):
         """
         :param customer_list: A list of dictionaries (likely de-serialized
@@ -19,20 +22,23 @@ class Session:
         self.bank_name = bank_name
         self.running = True
         for item in customer_list:
-            self.customers[item["pin"]] = Customer(item["pin"],
-                item["name"], item["accounts"])
+            self.customers[item["pin"]] = Customer(
+                item["pin"], item["name"], item["accounts"])
         # Store customers by PIN for easy lookup.
         for customer in self.customers.values():
             customer.update_account_summary()
 
     def display_homescreen(self):
-        """
-        """
         print "Welcome to {}!".format(self.bank_name)
 
     def get_customer(self, max_attempts=3):
-        """"Retrieve customer information by PIN.
-        The secret admin code for shutting down the session is xxxx.
+        """"Retrieve a customer object by PIN.
+
+        The secret admin code for shutting down the session is 'xxxx'.
+
+        :param max_attempts:
+        :type max_attempts:
+        :returns: None
         """
         pin = str(raw_input("To get started, please enter your PIN: "))
         attempts = 0
@@ -43,12 +49,11 @@ class Session:
             if attempts >= max_attempts:
                 print "Canceling after {} attempts.".format(max_attempts)
                 break
-                return
         if pin == "xxxx":
             self.running = False
         else:
-            self.current_customer = self.customers.get(pin,
-                "That is not a valid PIN. Please try again.")
+            # TO-DO: Gracefully handle invalid PIN entries.
+            self.current_customer = self.customers.get(pin)
 
     def receipt(self):
         """
@@ -81,7 +86,7 @@ class Session:
         attempts = 0
         while answer not in BOOLEAN_LOOKUP:
             answer = clean(raw_input(retry_instructions))
-            attempts +=1
+            attempts += 1
             if attempts >= 3:
                 print "Canceling transaction after three attempts."
                 break
@@ -91,6 +96,7 @@ class Session:
         else:
             print "Not a valid response. Canceling transaction."
             return
+
     def serve(self):
         """
         """
@@ -98,7 +104,8 @@ class Session:
         while decision is True:
             account_choice = clean(raw_input(
                 self.current_customer.display_account_choices()))
-            current_account = self.current_customer.accounts[ACCOUNT_LOOKUP[account_choice]]
+            current_account = (self.current_customer.accounts
+                [ACCOUNT_LOOKUP[account_choice]])
             current_account.execute_transactions()
             decision = self.proceed()
             self.current_customer.num_transactions += 1

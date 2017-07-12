@@ -2,10 +2,12 @@
 
 
 ## Improvements:
-- Many functions in this implementation display error messages to the user such
-as "Not a valid response. Canceling transaction." However, a programmer fixing
-and extending this application might wish to throw actual errors and raise
+- Many functions in this implementation tell the user warnings such as
+"Not a valid response. Canceling transaction." However, a programmer fixing
+and extending this application might wish to throw errors and raise
 actual exceptions "behind the scenes" for efficient debugging.
+
+- There needs to be more (and more consistent) error handling in general.
 
 - There are several blocks like the following scattered among the modules,
 none of them standardized:
@@ -19,16 +21,19 @@ none of them standardized:
                 break
                 return
 ```
-It would be a worthwhile exercise to abstract this behavior. For example, we
+It would be worthwhile to abstract this behavior. For example, we
 could try writing a decorator called `retry()` that would take in a
 `max_attempts` argument, then decorate any action allowing more than one try.
+
+- Withdrawals and deposits are not that different from one another.
+Perhaps we could write a `Transaction` class that both would inherit from.
 
 - The application is currently small enough to hold the main method,
 all modules, and all tests in one folder. However, as it grows, we will need
 to introduce cleaner folder structure--perhaps two subfolders called `tests`
 and `lib` to start out.
 
--At this time, only unit tests for the individual modules are
+- At this time, only unit tests for the individual modules are
 included. A full test suite would also include an end-to-end test for
 the application named `test_app.py`.
 
