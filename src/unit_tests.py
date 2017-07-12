@@ -1,11 +1,13 @@
 """
+**Note**: There are broken unit tests for cases that should be handled in
+the future.
 """
 
 import unittest
 import Utils
-# from Account import Account
-# from Customer import Customer
-# from Session import Session
+from Account import Account
+from Customer import Customer
+from Session import Session
 
 class TestAccount(unittest.TestCase):
     def test_execute_transactions(self):
