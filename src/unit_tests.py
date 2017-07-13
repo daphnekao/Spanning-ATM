@@ -1,7 +1,10 @@
 """Unit tests for the application.
 
 **Note**: There are broken unit tests for cases that should be handled in
-the future. These are marked as expected failures for now.
+the future. These are marked as expected failures for now. There are also
+a handful of methods that are very complicated and would require extensive
+mocking of the `raw_input()` function to test fully. They are marked for
+code review.
 """
 
 import unittest
@@ -14,6 +17,8 @@ from Account import Account
 from Customer import Customer
 from Session import Session
 
+CODE_REVIEW_COMMENT = ("Function is too complex; should refactor and/or "
+    "discuss with others before proceeding.")
 
 class TestAccount(unittest.TestCase):
     """Tests the `Account.Account` class."""
@@ -69,16 +74,34 @@ class TestAccount(unittest.TestCase):
         self.assertRaises(TypeError, account.report_transaction_success,
             "deposit", "string where there should be a float or an int")
 
+    @unittest.skip(CODE_REVIEW_COMMENT)
     def test_deposit(self):
         pass
 
+    @unittest.skip(CODE_REVIEW_COMMENT)
     def test_withdraw(self):
         pass
 
 
 class TestCustomer(unittest.TestCase):
     """Tests the `Customer.Customer` class."""
+    # def setUp():
+    #     accounts = [
+    #         {
+    #             "account_type": "checking",
+    #             "balance": 256.45
+    #         },
+    #         {
+    #             "account_type": "savings",
+    #             "balance": 100467.21
+    #         }
+    #     ]
+    #     self.customer = Customer("0121", "Worf", accounts)
+
     def test_display_account_choices(self):
+        pass
+
+    def test_display_account_choices_no_accounts(self):
         pass
 
     def test_update_account_summary(self):
@@ -128,6 +151,10 @@ class TestSession(unittest.TestCase):
         self.session = Session(self.customer_list, "UT Credit Union")
         self.session.current_customer = Customer("0121", "Worf",
             self.customer_list[1]["accounts"])
+        self.session.current_customer.summary = [
+            "You fought well today",
+            "You will continue to fight well tomorrow"
+            ]
 
     def confirmPrintStatement(self, func, expected_output):
         captured_output = StringIO.StringIO()
@@ -147,6 +174,7 @@ class TestSession(unittest.TestCase):
         pass
 
     def test_receipt(self):
+        # Confirm that update_account_summary() was called
         pass
 
     # Why is this failing?
@@ -154,9 +182,8 @@ class TestSession(unittest.TestCase):
         expected_greeting = (
             "Hello, Worf!\n"
             "Here is your account summary: \n"
-            "'checking': $256.45 available\n"
-            "'savings': $100,467.21 available\n"
-            "\n"
+            "You fought well today\n"
+            "You will continue to fight well tomorrow\n"
             )
         self.confirmPrintStatement(self.session.greet_customer,
             expected_greeting)
@@ -164,6 +191,8 @@ class TestSession(unittest.TestCase):
     def test_proceed(self):
         pass
 
+    @unittest.skip(CODE_REVIEW_COMMENT)
+    # Use doctest for this?
     def test_serve(self):
         pass
 

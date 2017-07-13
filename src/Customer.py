@@ -18,7 +18,7 @@ class Customer:
         """
         self.pin = pin
         self.name = name
-        self.accounts = {}  # A list of dictionaries
+        self.accounts = {}  # Account objects stored by type (checking, etc.)
         self.summary = []  # A list of dictionaries
         self.num_transactions = 0
 
