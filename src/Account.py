@@ -12,6 +12,20 @@ CODES = {
     "money market": "m"
 }
 
+# These are used below in the `execute_transactions()` method.
+TRANSACTION_INSTRUCTIONS = (
+    "To make a withdrawal, press w. \n"
+    "To make a deposit, press d. \n"
+    "To cancel, press x. \n"
+    )
+TRANSACTION_RETRY_INSTRUCTIONS = "You must enter w, d or x. Try again: "
+
+# This is used below in the `report_transaction_success()` method.
+VERBS = {
+    "deposit": "deposited",
+    "withdrawal": "withdrew"
+}
+
 # As we introduce more fees, we may wish to store them in a dictionary.
 OVERDRAFT_FEE = 33
 
@@ -40,18 +54,12 @@ class Account:
 
         :returns: None
         """
-        instructions = (
-            "To make a withdrawal, press w. \n"
-            "To make a deposit, press d. \n"
-            "To cancel, press x. \n"
-            )
-        retry_instructions = "You must enter w, d or x. Try again: "
         # TO-DO: What if the user presses a number or other weird character?
         # Handle these errors gracefully.
-        answer = clean(raw_input(instructions))
+        answer = clean(raw_input(TRANSACTION_INSTRUCTIONS))
         attempts = 0
         while answer not in ["w", "d", "x"]:
-            answer = clean(raw_input(retry_instructions))
+            answer = clean(raw_input(TRANSACTION_RETRY_INSTRUCTIONS))
             attempts += 1
             if attempts >= 3:
                 print "Canceling transaction after 3 attempts."
@@ -96,13 +104,9 @@ class Account:
         :returns: A message confirming that the balance was adjusted correctly.
         :return type: ``str``
         """
-        verbs = {
-            "deposit": "deposited",
-            "withdrawal": "withdrew"
-        }
-        if transaction_type in verbs:
+        if transaction_type in VERBS:
             report = "Successfully {} {}. New balance: {}".format(
-                verbs[transaction_type], dollar(amount), dollar(self.balance))
+                VERBS[transaction_type], dollar(amount), dollar(self.balance))
         else:
             warning = (
                 "The only transaction types available at this time "
@@ -148,9 +152,10 @@ class Account:
         else:
             withdrawal_amount = float(response)
             difference = self.balance - withdrawal_amount
+            # TO-DO (Bug Fix): The program shuts down if the customer does not
+            # comply with the $200 limit or the multiple of $20 rule. Add a
+            # while loop to allow them to continue banking in other ways.
             if withdrawal_amount > 200:
-                # TO-DO: Enforce this rule. Allow the customer to continue
-                # banking in other ways if they do not comply with the limit.
                 print "You may not withdraw more than $200 in one session."
             elif withdrawal_amount % 20 != 0:
                 print "You must enter a multiple of $20"
